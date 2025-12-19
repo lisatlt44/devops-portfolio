@@ -340,7 +340,7 @@ class Developer implements Fullstack {
       </section>
 
       {/* --- THE LAB (Horizontal Scroll) (New) --- */}
-      <section ref={labSectionRef} className="relative h-screen bg-black z-40 overflow-hidden flex flex-col">
+      <section ref={labSectionRef} className="relative h-screen bg-black z-50 overflow-hidden flex flex-col">
         <div className="max-w-7xl mx-auto w-full px-6 pt-32 mb-12 relative z-30">
           <h2 className="text-4xl md:text-6xl font-bold text-white">The Lab</h2>
           <p className="text-text-muted mt-2">Expérimentations & Side Projects</p>
@@ -378,7 +378,7 @@ class Developer implements Fullstack {
       </section>
 
       {/* --- TESTIMONIALS (New Animation) --- */}
-      <section className="py-32 px-6 relative z-30 bg-background">
+      <section className="py-32 px-6 relative z-10 bg-background">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-16 text-center gsap-reveal">
             Ce qu'ils disent <span className="text-primary">de moi</span>
