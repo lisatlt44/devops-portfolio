@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette de couleurs */
+  --color-primary: #F7ACCF;
+  --color-secondary: #E8F0FF;
+  --color-text: #392759;
+
+  /* Typographie (liée aux variables de layout.tsx) */
+  --font-display: var(--font-syne);
+  --font-body: var(--font-poppins);
+}
+
+/* Styles globaux */
+body {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
