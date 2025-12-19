@@ -21,7 +21,9 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Scene3D from "@/components/Scene3D";
+import dynamic from "next/dynamic";
+
+const Scene3D = dynamic(() => import("@/components/Scene3D"), { ssr: false });
 
 // Register GSAP Plugin
 if (typeof window !== "undefined") {
