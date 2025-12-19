@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Syne, Poppins } from "next/font/google";
 import "./globals.css";
 
