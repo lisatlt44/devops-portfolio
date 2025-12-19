@@ -11,8 +11,11 @@
   --color-text-muted: #888888;
 
   /* Typographie */
-  --font-display: var(--font-syne);
-  --font-body: var(--font-poppins);
+  --font-display: var(--font-syne), sans-serif;
+  --font-body: var(--font-poppins), sans-serif;
+  
+  /* Override Tailwind defaults */
+  --font-sans: var(--font-poppins), sans-serif;
   
   /* Animations custom */
   --animate-blob: blob 10s infinite;
@@ -35,7 +38,7 @@
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: var(--font-body);
+  font-family: var(--font-poppins), sans-serif; /* Direct reference to Next.js variable */
   overflow-x: hidden;
   selection-background-color: var(--color-primary);
   selection-color: white;
@@ -56,7 +59,7 @@ body::before {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
+  font-family: var(--font-syne), sans-serif; /* Direct reference to Next.js variable */
 }
 
 /* Hide Scrollbar but keep functionality */
