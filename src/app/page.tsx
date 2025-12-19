@@ -340,13 +340,13 @@ class Developer implements Fullstack {
       </section>
 
       {/* --- THE LAB (Horizontal Scroll) (New) --- */}
-      <section ref={labSectionRef} className="relative h-screen bg-black z-20 overflow-hidden flex items-center">
-        <div className="absolute top-12 left-12 z-30">
+      <section ref={labSectionRef} className="relative h-screen bg-black z-20 overflow-hidden flex flex-col">
+        <div className="max-w-7xl mx-auto w-full px-6 pt-32 mb-12 relative z-30">
           <h2 className="text-4xl md:text-6xl font-bold text-white">The Lab</h2>
           <p className="text-text-muted mt-2">Expérimentations & Side Projects</p>
         </div>
         
-        <div ref={labContainerRef} className="flex gap-12 px-12 md:px-32 w-fit">
+        <div ref={labContainerRef} className="flex gap-12 px-6 w-fit flex-1 items-center">
           <LabCard 
             title="WebGL Fluid Sim" 
             desc="Simulation de fluides interactive en WebGL natif."
