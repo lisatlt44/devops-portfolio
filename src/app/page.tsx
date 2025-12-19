@@ -340,7 +340,7 @@ class Developer implements Fullstack {
       </section>
 
       {/* --- THE LAB (Horizontal Scroll) (New) --- */}
-      <section ref={labSectionRef} className="relative h-screen bg-black z-20 overflow-hidden flex flex-col">
+      <section ref={labSectionRef} className="relative h-screen bg-black z-40 overflow-hidden flex flex-col">
         <div className="max-w-7xl mx-auto w-full px-6 pt-32 mb-12 relative z-30">
           <h2 className="text-4xl md:text-6xl font-bold text-white">The Lab</h2>
           <p className="text-text-muted mt-2">Expérimentations & Side Projects</p>
@@ -377,25 +377,25 @@ class Developer implements Fullstack {
         </div>
       </section>
 
-      {/* --- TESTIMONIALS (3D Tilt) (New) --- */}
-      <section className="py-32 px-6 relative z-10">
+      {/* --- TESTIMONIALS (New Animation) --- */}
+      <section className="py-32 px-6 relative z-30 bg-background">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-16 text-center gsap-reveal">
             Ce qu'ils disent <span className="text-primary">de moi</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <TiltCard 
+            <TestimonialCard 
               quote="Lisa a transformé notre vision en réalité. Son expertise technique et sa sensibilité design sont rares."
               author="Thomas D."
               role="CEO, TechStart"
             />
-            <TiltCard 
+            <TestimonialCard 
               quote="Un code d'une propreté exemplaire. C'est un plaisir de travailler sur une codebase architecturée par Lisa."
               author="Sarah M."
               role="Lead Dev, BigCorp"
             />
-            <TiltCard 
+            <TestimonialCard 
               quote="Efficace, proactive et créative. Elle a su proposer des solutions innovantes à nos problèmes complexes."
               author="Marc L."
               role="Product Owner, Agency"
@@ -534,38 +534,22 @@ function LabCard({ title, desc, icon, color }: any) {
   );
 }
 
-function TiltCard({ quote, author, role }: any) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [15, -15]);
-  const rotateY = useTransform(x, [-100, 100], [-15, 15]);
-
-  function handleMouse(event: any) {
-      const rect = event.currentTarget.getBoundingClientRect();
-      x.set(event.clientX - rect.left - rect.width / 2);
-      y.set(event.clientY - rect.top - rect.height / 2);
-  }
-  
+function TestimonialCard({ quote, author, role }: any) {
   return (
-      <motion.div 
-          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-          onMouseMove={handleMouse}
-          onMouseLeave={() => { x.set(0); y.set(0); }}
-          className="relative p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm group cursor-default"
-      >
-        <div style={{ transform: "translateZ(50px)" }} className="relative z-10">
-          <div className="mb-6 text-primary">
-            <MessageSquare size={32} />
-          </div>
-          <p className="text-lg text-white/80 italic mb-8 leading-relaxed">"{quote}"</p>
-          <div>
-            <div className="font-bold text-white">{author}</div>
-            <div className="text-sm text-text-muted">{role}</div>
-          </div>
+    <motion.div 
+      whileHover={{ y: -10, scale: 1.02 }}
+      className="relative p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm group transition-all duration-300 hover:bg-white/10 hover:border-primary/30 hover:shadow-[0_0_30px_rgba(162,89,255,0.15)]"
+    >
+      <div className="relative z-10">
+        <div className="mb-6 text-primary/50 group-hover:text-primary transition-colors">
+          <MessageSquare size={32} />
         </div>
-        
-        {/* Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
-      </motion.div>
+        <p className="text-lg text-white/80 italic mb-8 leading-relaxed">"{quote}"</p>
+        <div>
+          <div className="font-bold text-white">{author}</div>
+          <div className="text-sm text-text-muted">{role}</div>
+        </div>
+      </div>
+    </motion.div>
   )
 }
