@@ -1,0 +1,6 @@
+{
+  "sonarlint.connectedMode.project": {
+    "connectionId": "SonarQube MDS",
+    "projectKey": "lisatlt44_devops-portfolio_f25a9f65-23f2-494d-bad7-beae6958326d"
+  }
+}
