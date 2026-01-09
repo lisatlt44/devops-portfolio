@@ -1,6 +1,6 @@
 ﻿@import "tailwindcss";
 
-@theme {
+:root {
   /* Palette "Deep Space & Neon" */
   --color-background: #050505;
   --color-surface: #0A0A0A;
@@ -40,8 +40,11 @@ body {
   color: var(--color-text);
   font-family: var(--font-poppins), sans-serif; /* Direct reference to Next.js variable */
   overflow-x: hidden;
-  selection-background-color: var(--color-primary);
-  selection-color: white;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: white;
 }
 
 /* Noise Texture Overlay */
@@ -86,6 +89,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-gradient {
   background: linear-gradient(to right, #fff, #888);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
