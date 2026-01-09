@@ -24,7 +24,7 @@ import dynamic from "next/dynamic";
 const Scene3D = dynamic(() => import("@/components/Scene3D"), { ssr: false });
 
 // Register GSAP Plugin
-if (typeof window !== "undefined") {
+if (globalThis.window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -86,7 +86,7 @@ export default function Home() {
       if (labSection && labContainer) {
         // @ts-ignore
         const scrollWidth = labContainer.scrollWidth;
-        const windowWidth = window.innerWidth;
+        const windowWidth = globalThis.window.innerWidth;
         
         gsap.to(labContainer, {
           x: () => -(scrollWidth - windowWidth),
@@ -184,8 +184,8 @@ export default function Home() {
       {/* --- INFINITE MARQUEE --- */}
       <div className="py-8 border-y border-white/5 bg-black/50 backdrop-blur-md overflow-hidden flex relative z-20">
         <div className="animate-marquee whitespace-nowrap flex gap-16 items-center">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex gap-16 items-center text-xl font-bold text-white/30 uppercase tracking-widest font-mono">
+          {["mq1", "mq2", "mq3", "mq4"].map((id) => (
+            <div key={id} className="flex gap-16 items-center text-xl font-bold text-white/30 uppercase tracking-widest font-mono">
               <span className="text-primary">Next.js 16</span>
               <span></span>
               <span className="text-secondary">React Three Fiber</span>
@@ -436,9 +436,9 @@ class Developer implements Fullstack {
           <div className="mt-32 flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-8 text-text-muted text-sm">
             <div> 2025 Lisa. All rights reserved.</div>
             <div className="flex gap-8 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-              <a href="#" className="hover:text-white transition-colors">GitHub</a>
-              <a href="#" className="hover:text-white transition-colors">Twitter</a>
+              <a href="https://linkedin.com" className="hover:text-white transition-colors">LinkedIn</a>
+              <a href="https://github.com" className="hover:text-white transition-colors">GitHub</a>
+              <a href="https://twitter.com" className="hover:text-white transition-colors">Twitter</a>
             </div>
           </div>
         </div>
