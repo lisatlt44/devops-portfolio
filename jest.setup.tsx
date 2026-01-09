@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import React from 'react';
 
 // Mock de ResizeObserver qui n'existe pas dans JSDOM
 class ResizeObserver {
@@ -26,13 +27,14 @@ Object.defineProperty(window, 'matchMedia', {
 // Mock global pour react-three/fiber et three pour éviter les erreurs WebGL
 jest.mock('@react-three/fiber', () => ({
   ...jest.requireActual('@react-three/fiber'),
-  Canvas: ({ children }: { children: any }) => {
-    return {
-      type: 'div',
-      props: { 'data-testid': 'three-canvas', children },
-      key: null,
-    };
-  },
+  Canvas: ({ children }: { children: React.ReactNode }) => <div data-testid="three-canvas">{children}</div>,
+  useFrame: jest.fn(), // Mock useFrame pour éviter les erreurs hors contexte Canvas réel
+}));
+
+// Mock pour drei
+jest.mock('@react-three/drei', () => ({
+  Float: ({ children }: any) => <>{children}</>,
+  Stars: () => <div data-testid="drei-stars" />,
 }));
 
 // Mock GSAP pour éviter les soucis d'animation
