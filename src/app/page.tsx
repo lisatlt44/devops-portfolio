@@ -1,10 +1,8 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { useRef, useEffect, useLayoutEffect } from "react";
-import { 
-  Github, 
-  Linkedin, 
+import {
   Mail, 
   ArrowUpRight,
   Download,
@@ -35,16 +33,25 @@ export default function Home() {
   const heroTextRef = useRef(null);
   const labSectionRef = useRef(null);
   const labContainerRef = useRef(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
   
   // Mouse tracking for spotlight effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
+  useEffect(() => {
+    const section = heroSectionRef.current;
+    if (!section) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { left, top } = section.getBoundingClientRect();
+      mouseX.set(e.clientX - left);
+      mouseY.set(e.clientY - top);
+    };
+
+    section.addEventListener('mousemove', handleMouseMove);
+    return () => section.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
 
   // GSAP Animations
   useLayoutEffect(() => {
@@ -104,8 +111,8 @@ export default function Home() {
       
       {/* --- HERO SECTION (3D + Spotlight) --- */}
       <section 
+        ref={heroSectionRef}
         className="relative h-screen flex flex-col justify-center items-center overflow-hidden group"
-        onMouseMove={handleMouseMove}
       >
         {/* 3D Scene Background */}
         <Scene3D />
@@ -143,7 +150,7 @@ export default function Home() {
               LISA.DEV
             </h1>
             
-            <h1 className="text-6xl md:text-9xl font-bold mb-6 tracking-tighter leading-none relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl">
+            <h1 className="text-6xl md:text-9xl font-bold mb-6 tracking-tighter leading-none relative z-20 bg-clip-text text-transparent bg-linear-to-b from-white via-white to-white/40 drop-shadow-2xl">
               LISA<span className="text-primary">.</span>DEV
             </h1>
           </div>
@@ -222,8 +229,8 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="gsap-reveal relative h-[500px] glass-panel rounded-3xl p-8 overflow-hidden group border border-white/10 shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="gsap-reveal relative h-125 glass-panel rounded-3xl p-8 overflow-hidden group border border-white/10 shadow-2xl">
+            <div className="absolute inset-0 bg-linear-to-br from-primary/10 to-secondary/10 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="relative z-10 font-mono text-sm text-blue-300/80 leading-relaxed h-full overflow-y-auto custom-scrollbar">
               {`// My approach to software engineering
 class Developer implements Fullstack {
@@ -266,7 +273,7 @@ class Developer implements Fullstack {
 
           <div className="relative">
             {/* Vertical Line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent opacity-30 hidden md:block" />
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-primary via-secondary to-accent opacity-30 hidden md:block" />
             
             <div className="space-y-24">
               <ProcessStep 
@@ -406,7 +413,7 @@ class Developer implements Fullstack {
 
       {/* --- CONTACT & FOOTER --- */}
       <footer className="relative py-32 px-6 overflow-hidden z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b` from-transparent to-primary/10 pointer-events-none" />
         
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <div className="gsap-reveal">
@@ -459,7 +466,7 @@ function PhilosophyItem({ icon, title, desc }: any) {
 function StackedCard({ index, title, category, description, techs, color, gradient }: any) {
   return (
     <div className={`sticky top-32 rounded-3xl border border-white/10 overflow-hidden ${color} shadow-2xl gsap-reveal`}>
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-30`} />
+      <div className={`absolute inset-0 bg-linear-to-br ${gradient} opacity-30`} />
       
       <div className="relative z-10 p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -486,7 +493,7 @@ function StackedCard({ index, title, category, description, techs, color, gradie
         
         {/* Abstract Visual Representation */}
         <div className="aspect-square rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center relative overflow-hidden group backdrop-blur-sm">
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-linear-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="text-9xl font-bold text-white/5 select-none group-hover:scale-110 transition-transform duration-700 group-hover:text-white/10">
             {title.charAt(0)}
           </div>
@@ -516,7 +523,7 @@ function ProcessStep({ number, title, desc, icon, align }: any) {
 
 function LabCard({ title, desc, icon, color }: any) {
   return (
-    <div className={`w-[400px] h-[500px] flex-shrink-0 rounded-3xl border border-white/10 p-8 flex flex-col justify-between group hover:border-white/30 transition-colors ${color} backdrop-blur-sm`}>
+    <div className={`w-100 h-125 shrink-0 rounded-3xl border border-white/10 p-8 flex flex-col justify-between group hover:border-white/30 transition-colors ${color} backdrop-blur-sm`}>
       <div className="p-4 bg-white/10 w-fit rounded-xl text-white mb-8">
         {icon}
       </div>
