@@ -24,7 +24,7 @@ import dynamic from "next/dynamic";
 const Scene3D = dynamic(() => import("@/components/Scene3D"), { ssr: false });
 
 // Register GSAP Plugin
-if (globalThis.window !== undefined) {
+if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
