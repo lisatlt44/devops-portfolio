@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import { Syne, Poppins } from "next/font/google";
 import "./globals.css";
+import { FaroSetup } from "@/components/FaroSetup";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${syne.variable} ${poppins.variable} antialiased`}>
+        <FaroSetup />
         {children}
       </body>
     </html>
